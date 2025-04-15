@@ -1,4 +1,4 @@
-import supabase from "./supabase-client.js";
+import supabase from "./supabase-client";
 import { useEffect } from "react";
 
 function Dashboard() {
@@ -8,16 +8,12 @@ function Dashboard() {
 
   async function fetchMetrics() {
     // const { data, error } =
-    const response = await supabase
-      .from("sales_deals")
-      .select(
-        `
+    const response = await supabase.from("sales_deals").select(
+      `
         name,
-        value
+        value.sum()
         `
-      )
-      .order("value", { ascending: false })
-      .limit(1);
+    );
     console.log(response);
   }
 
